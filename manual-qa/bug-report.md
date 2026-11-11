@@ -9,7 +9,7 @@
 | **Severity** | Major: the admin sees wrong contact details for a real appointment and may call or greet the wrong person |
 | **Priority** | High |
 | **Reproducibility** | Always (2/2) |
-| **Status** | Open |
+| **Status** | **Fixed**, verified by retest on 2026-11-11 (see [Retest after fix](#retest-after-fix)) |
 | **Reported by** | StanUser, 2026-11-11 |
 
 ## Summary
@@ -71,3 +71,21 @@ Anna's name and phone are no longer shown anywhere in the dashboard.
 - **Possible fixes** (for the developer to decide): keep the name and phone with each appointment, or do not
   overwrite existing details and show the admin that the details differ.
 - **Related test case:** [TC-05](test-cases.md#tc-05-second-booking-with-the-same-email-keeps-the-first-appointments-details).
+
+## Retest after fix
+
+**Fix:** each appointment now keeps the name and phone entered when it was booked (the first option above).
+
+**Retest on 2026-11-11.** Same steps and environment, with fresh data so the result isn't affected by the
+appointments created during the original run:
+
+| Booking | Name | Email | Phone | Time |
+|---|---|---|---|---|
+| 1 | Anna Koval | `retest.qa@example.com` | +380501112233 | 17.11.2026, 10:00 |
+| 2 | Oleh Koval | `retest.qa@example.com` (same) | +380679998877 | 17.11.2026, 11:00 |
+
+**Result: Passed.**
+- The dashboard shows Anna Koval, +380501112233 for 10:00 and Oleh Koval, +380679998877 for 11:00.
+- Each "Booking request received" email in Mailpit greets the person who made that booking.
+
+![Dashboard after the retest](evidence/BUG-001-retest-after-fix.png)

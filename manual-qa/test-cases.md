@@ -11,7 +11,7 @@ the test date is at least 12 hours in the future (the site does not allow bookin
 | TC-02 | Booked time disappears from the time list | High | Positive | Passed |
 | TC-03 | Phone number with letters is rejected | Medium | Negative | Not run |
 | TC-04 | Booking without privacy consent is rejected | High | Negative | Not run |
-| TC-05 | Second booking with the same email keeps the first appointment's details | High | Negative | **Failed → [BUG-001](bug-report.md)** |
+| TC-05 | Second booking with the same email keeps the first appointment's details | High | Negative | Passed (failed first, found [BUG-001](bug-report.md); passed on retest after the fix) |
 
 ---
 
@@ -73,4 +73,7 @@ the test date is at least 12 hours in the future (the site does not allow bookin
 - 10:00: **Anna Koval, +380501112233**.
 - 11:00: **Oleh Koval, +380679998877**.
 
-**Actual result (2026-11-11):** both appointments show Oleh Koval, +380679998877. See [BUG-001](bug-report.md).
+**First run (2026-11-11): Failed.** Both appointments showed Oleh Koval, +380679998877. Reported as [BUG-001](bug-report.md).
+
+**Retest after the fix (2026-11-11): Passed.** Each appointment kept its own name and phone
+(retest data and screenshot in [BUG-001 → Retest after fix](bug-report.md#retest-after-fix)).

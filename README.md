@@ -242,5 +242,5 @@ and the administrator confirms the request in a dashboard.
 
 | Document | Contents |
 |---|---|
-| [Bug report BUG-001](manual-qa/bug-report.md) | A real bug found and reproduced: a second booking with the same email overwrites the name and phone on the client's earlier appointment. Includes steps, expected vs actual result, severity and a screenshot |
-| [Test cases](manual-qa/test-cases.md) | 5 test cases for the booking form (positive and negative). TC-05 found BUG-001 |
+| [Bug report BUG-001](manual-qa/bug-report.md) | A real bug, found, reported, fixed and verified by retest: a second booking with the same email overwrote the name and phone on the client's earlier appointment. Includes steps, expected vs actual result, severity, and screenshots before and after the fix |
+| [Test cases](manual-qa/test-cases.md) | 5 test cases for the booking form (positive and negative). TC-05 found BUG-001 and passed on retest after the fix |
