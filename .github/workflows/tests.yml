@@ -1,0 +1,40 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Install Playwright browser
+        run: pwsh tests/UiTests/bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+
+      - name: API tests
+        run: dotnet test tests/ApiTests --configuration Release --no-build --logger "trx;LogFileName=api.trx" --results-directory TestResults
+
+      - name: UI tests
+        if: always()
+        run: dotnet test tests/UiTests --configuration Release --no-build --logger "trx;LogFileName=ui.trx" --results-directory TestResults
+
+      - name: Upload test results and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            TestResults/
+            tests/UiTests/bin/Release/net10.0/screenshots/
+          if-no-files-found: ignore
