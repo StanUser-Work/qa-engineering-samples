@@ -23,6 +23,9 @@ pwsh tests/UiTests/bin/Debug/net10.0/playwright.ps1 install chromium
 dotnet test
 ```
 
+On Windows without PowerShell 7, replace the 4th line with
+`powershell -ExecutionPolicy Bypass -File tests/UiTests/bin/Debug/net10.0/playwright.ps1 install chromium`.
+
 Otherwise, follow the step-by-step guide below.
 
 ---
